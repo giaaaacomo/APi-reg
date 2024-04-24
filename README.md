@@ -25,7 +25,7 @@ The goal of the research is to find the best ways and practices to automatically
 >Initially, the goal was to create a visualization tool that allowed to perceive the variation in space and time of the layouts containing different images of the same artwork in context (eg.different scans of the Monnalisa from different publications), from the Visual Contagions artwork cluster. Since the initial prompt, the interest regarding the technological aspects about the automation of the process took the priority over the tool itself, shifting the project to this research.
 
 # Requirements
-* Image files of the same format and size (although not necessary for all the solutions, it's a good way to be sure to be able to experiment with different tools)
+* Image files of the same format and size (although not necessary for all the solutions, it's a good way to be sure to be able to experiment with different tools). This can easily be done by creating a blank file on Photoshop with the desired size, importing all the photos as different layers and exporting every layer as a single image
 
 # Hardware used for the tests:
 MSI GP76 Leopard
@@ -92,7 +92,8 @@ All of this leads to a steep selection in the available plugins (that will be ex
       6. press ok
    
 ### FIJI
-    1. import all the images as a serie (file > import > import serie of images)
+
+    1. import all the images as a serie (file > import > image sequence)
     2. go to plugin, head to registration, select the desired plugin
 #### FIJI PLUGINS
   **disclaimer**
@@ -100,7 +101,21 @@ All of this leads to a steep selection in the available plugins (that will be ex
 cit. The University of Texas at Austin (Texas Advanced Computing Center)
  
  >in our tests we used 32 images about ~3mb each, that ended up using up to 96% of the 16gbs of ram. Often, ram saturation ends up prematurely the process giving an error. The disclaimer above was written for the elastic alignment but should be followed as a rule of thumb for all the plugins. 
-* elastic alignment
+
+1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
+   Subdivides the images into meshes of triangles; tries to connect the vertices simulating a spring-like deformation
+3. [Descriptor-based series registration]
+4. [Rigid Registration]
+5. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
+6. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
+7. [Register Virtual Stack Slices](https://imagej.net/plugins/register-virtual-stack-slices)
+8. [TurboReg](https://bigwww.epfl.ch/thevenaz/turboreg/)
+9. [MultiStackReg](https://github.com/miura/MultiStackRegistration)
+10. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)
+11. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
+12. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
+13. [Fijiyama](https://imagej.net/plugins/fijiyama)
+    
 ### Hugin
 
 # Future developments
