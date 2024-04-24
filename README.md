@@ -126,40 +126,42 @@ cit. The University of Texas at Austin (Texas Advanced Computing Center)
 ___
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
    >*results:* failure  
-   >*elapsed time:* 12h (MSI)
+   >*elapsed time:* ~12h (MSI)
    
    Subdivides the images into meshes of triangles; tries to connect the vertices simulating a spring-like deformation, then tries to match the content of the triangles and the vertices.
-   Despite a lot of customizability, after 12 hours of processing the output that ESA gave us was a stack of 202 black images
+   Despite a lot of customizability, after 12 hours of processing the output that ESA gave us was a stack of 202 black images.
    
 3. [Descriptor-based series registration]
    >*results:* failure  
    >*elapsed time:*  
 
-5. [Rigid Registration]
-   >*results:* failure  
-   >*elapsed time:*  
-
 7. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
    >*results:* failure  
-   >*elapsed time:* 15min (MSI)
+   >*elapsed time:* ~15min (MSI)
    
    The plugin basically searches for SIFT features and tries to match them between images.
    It is actually able to match similar images, but struggles with more articulated ones.
-   Tried with both affinity and similarity algorithms, the latter gave the best results.
+   Tried with both affinity and similarity algorithms, the former gave better results, but was not able to keep a consistent position of the picture.
     
 
 9. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
     >*results:* mixed  
-    >*elapsed time:*  
+    >*elapsed time:* ~25min (MSI)
+
+    This is an advanced version of Linear Stack Alignment with SIFT, that is able to match the alignment to the desired channel.
+   The results are mixed: worse than the basic LSA, but surprisingly good with another set of images.
+   It requires the PTBIOP update from the update manager.
 
 11. [Register Virtual Stack Slices](https://imagej.net/plugins/register-virtual-stack-slices)
     >*results:* failure  
-    >*elapsed time:*  
+    >*elapsed time:*  ~20min
+
+    Seemed promising, but keeps reporting errors that abort the operation early. Looking online for solutions it seems that encountering a picture without recognizable features will stop the registration, making this tool ultra-sensible to image variations. 
 
 13. [TurboReg](https://bigwww.epfl.ch/thevenaz/turboreg/)
     >~~*results:*~~  
     >~~*elapsed time:*~~  
-    Used MultiStackReg instead, that is and advanced version of this.
+    Used MultiStackReg instead, that is an advanced version of this.
 
 15. [MultiStackReg](https://github.com/miura/MultiStackRegistration)
     >*results:* failure  
@@ -176,7 +178,14 @@ We tried both rigid body and affine methods, but we didn't get good results.
 
 17. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)
     >*results:* failure  
-    >*elapsed time:*  
+    >*elapsed time:*
+    
+
+5. [Rigid Registration]
+   >*results:* failure  
+   >*elapsed time:* 5min (MSI)
+
+   Simple tool made to correct color shift and translation; like MultiStackReg requires a single channel, but is able to apply the transformation to the other channels automatically. Seems to be unable to elaborate complex and diverse data such as the ones provided in the research.
 
 19. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
     >*results:* failure  
@@ -193,9 +202,11 @@ We tried both rigid body and affine methods, but we didn't get good results.
 ### Hugin
 
 # Conclusions  
+    The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used date back up to the late 90's, but are still commonly used today in 
 
 # Future developments
     *peer-review of the project, both from scientist and from computer vision experts
+    *better understanding of the fine-tuning, and new benchmark following this
     *wiki?
     *image elaboration through Google colab or similars  
     *implementation of CLIJ for GPU acceleration in FIJI
