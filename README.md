@@ -57,7 +57,7 @@ ASUS ROG GL502VM
   FIJI is an image analysis tool mostly used by bioanalysis. It's a combination of ImageJ and ImageJ2, and comes with many plugins preinstalled and an update manager that allows also to install new plugins within the app.
 
 Trying FIJI means trying the different plugins that do image registration. [Here](https://imagej.net/list-of-extensions) is the official list, that can be filtered to show only registration plugins; from that list we selected those who seemed to fit the best: keep in mind that the original use case scenario for the software is biomedical analysis, therefore many of the available tools are tailor-made for cellular-scale elements, for applications like the study of cellular reproduction, bone healing, tumoral cells development and propagation. This means that the available tools more often than not won't work as if they were designed for all-purpose images in mind, and this also means that not all plugins will work with our images, depending on their diversity, resolution, and visual features. Keep also in mind that biomedical analysis workstations have powerful hardware, and the programs they use are though to be run in those machines.
-All of this leads to a steep selection in the available plugins (that will be explained further in the next chapter) and we ended up trying the following:
+All of this leads to a steep selection in the available plugins (that will be explained further in the next chapter) and we ended up picking the following:
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
 2. [Descriptor-based series registration]
 3. [Rigid Registration]
@@ -95,32 +95,102 @@ All of this leads to a steep selection in the available plugins (that will be ex
 
     1. import all the images as a serie (file > import > image sequence)
     2. go to plugin, head to registration, select the desired plugin
+
+##### How do registration works (Feature extraction)
+The basic concept followed by the majority of plugins used for this research is that the program first of all elaborates every image, looking for peculiar and recurring features, then compares every feature to the other images, then tries to match the features in every image by moving, rotating and scaling them. Some specific plugin use peculiar manipulations that work in custom ways (eg. Elastic Stack Manipolation).
+There are two main methods for feature extraction: SIFT and MOPS. To summarize, here are the differences:
+* SIFT: It detects keypoints in an image that are stable under changes like scale, rotation, and illumination. It uses a complex process involving finding extrema in a scale-space representation of the image and assigning orientations to these keypoints. Then, a descriptor is computed around each keypoint to capture the local image information.
+  >*tends to be more precise, but also more complex to compute  
+  >*works better even in challenging conditions 
+* MOPS: It focuses on extracting oriented patches at different scales from the image. These patches are centered around interest points, typically corners detected using the Harris corner detector. The patch is then rotated to align with a dominant local gradient direction and a descriptor is obtained by sampling the intensity values within the patch.
+  >*tends to be faster, both to compute and to compare  
+  >*less precise  
+  >*better distribution along the space  
+
+##### Registration techniques:
+There are different ways to register images, and the main are:  
+* Translation  
+* Rigid (translation + rotation)  
+* Similarity (translation + rotation + isotropic scaling)  
+* Affine  
+* Elastic (via BUnwarpJ with cubic B-splines)  
+(source: https://imagej.net/imaging/registration)
+
 #### FIJI PLUGINS
   **disclaimer**
   >If you are using a computer with many CPU cores, you need to make sure that you have enough memory (RAM) to handle your images for alignment. In general, you'll need 10x the file size of your largest 2D image for each core (see: https://imagej.net/plugins/trakem2/#how-much-ram-should-i-allocate-to-the-jvm-for-fiji-to-run-trakem2). EXAMPLE: If your dataset consists of images that are 600MB each and your computer has 12 cores, you will need at least 72 GB of RAM (= 600 MB x 10 x 12 cores).  
 cit. The University of Texas at Austin (Texas Advanced Computing Center)
  
- >in our tests we used 32 images about ~3mb each, that ended up using up to 96% of the 16gbs of ram. Often, ram saturation ends up prematurely the process giving an error. The disclaimer above was written for the elastic alignment but should be followed as a rule of thumb for all the plugins. 
+ >>in our tests we used 32 images about ~3mb each, that ended up using up to 96% of the 16gbs of ram. Often, ram saturation ends up prematurely the process giving an error. The disclaimer above was written for the elastic alignment but should be followed as a rule of thumb for all the plugins. 
 
+___
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
+   >*results:* failure  
+   >*elapsed time:*  (MSI)
+   
    Subdivides the images into meshes of triangles; tries to connect the vertices simulating a spring-like deformation
 3. [Descriptor-based series registration]
-4. [Rigid Registration]
-5. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
-6. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
-7. [Register Virtual Stack Slices](https://imagej.net/plugins/register-virtual-stack-slices)
-8. [TurboReg](https://bigwww.epfl.ch/thevenaz/turboreg/)
-9. [MultiStackReg](https://github.com/miura/MultiStackRegistration)
-10. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)
-11. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
-12. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
-13. [Fijiyama](https://imagej.net/plugins/fijiyama)
+   >*results:* failure  
+   >*elapsed time:*  
+
+5. [Rigid Registration]
+   >*results:* failure  
+   >*elapsed time:*  
+
+7. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
+   >*results:* failure  
+   >*elapsed time:*  
+
+9. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
+    >*results:* mixed  
+    >*elapsed time:*  
+
+11. [Register Virtual Stack Slices](https://imagej.net/plugins/register-virtual-stack-slices)
+    >*results:* failure  
+    >*elapsed time:*  
+
+13. [TurboReg](https://bigwww.epfl.ch/thevenaz/turboreg/)
+    >~~*results:*~~  
+    >~~*elapsed time:*~~  
+    Used MultiStackReg instead, that is and advanced version of this.
+
+15. [MultiStackReg](https://github.com/miura/MultiStackRegistration)
+    >*results:* failure  
+    >*elapsed time:* ~5 min (ROG)  
+
+MultiStackReg was made to align unregistered color channels in microscope pictures (when this happens, images get blurry). It's based on TurboReg, and above optimizations, adds the ability to check stacks of images instead of singular images.  
+Since it's purpose is to align channels of the same image, but we need it's ability to align different images, we need to pick one as a source, clone that as many times as there are images to compute, open the source (that now is a sequence) separately, then open the others as a sequence.  
+Since it's made to align channels, the images in both sequences need to have them splitted:  
+    ```image>color>split channels```  
+Now we have to run the plugin and select the source as first image, using it as reference, the target as second image that needs to be aligned to the first stack. Since it allows the registration of only two channels at a time, it's possibile to do a second registration using the first as reference, to register the third channel. It is then possible to merge the channels back into one to get the colored images back.
+We tried both rigid body and affine methods, but we didn't get good results.
+   
+
+
+17. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)
+    >*results:* failure  
+    >*elapsed time:*  
+
+19. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
+    >*results:* failure  
+    >*elapsed time:*  
+
+21. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
+    >*results:* failure  
+    >*elapsed time:*  
+
+23. [Fijiyama](https://imagej.net/plugins/fijiyama)
+    >*results:* failure  
+    >*elapsed time:*  
     
 ### Hugin
 
 # Future developments
+    *peer-review of the project, both from scientist and from computer vision experts
+    *wiki?
     *image elaboration through Google colab or similars  
     *implementation of CLIJ for GPU acceleration in FIJI
 # Sources
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10819694/  
 https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin/tuto1
+https://imagej.net/imaging/registration
