@@ -1,6 +1,15 @@
 # APi-reg
 Image registration processes for all-purpose images (non-specific and non-specialized)
 
+```
+    ___    ____  _                      
+   /   |  / __ \(_)     ________  ____ _
+  / /| | / /_/ / /_____/ ___/ _ \/ __ `/
+ / ___ |/ ____/ /_____/ /  /  __/ /_/ / 
+/_/  |_/_/   /_/     /_/   \___/\__, /  
+                               /____/
+```  
+                               
 # Introduction
 This repo is the result of a research for the Information Design course at [UNIRSM](https://design.unirsm.sm/) (2024), in collaboration with the [Visual Contagions project](https://www.unige.ch/visualcontagions/) from the [University of Geneva](https://www.unige.ch/).
 The goal of the research is to find the best ways and practices to automatically register (align) a stack of images that contain the same picture, like the following:
