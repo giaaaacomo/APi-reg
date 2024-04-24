@@ -39,24 +39,30 @@ ASUS ROG GL502VM
 * 40gb RAM
 
 # Steps we took
-## Programs tryout
-* Photoshop (24.4.1)
+## Programs tryout 
+   
+### * Photoshop (24.4.1)
   
    Photoshop allows to autoalign layers based on common features, following different patterns (automatic, perspective, collage, cylindrical, spherical, reposition)
    
 
-   ### review
-   > pros: user Friendly, works well with similar images, fast
-   > 
+   **review**
+   > pros: user Friendly, works well with similar images, fast  
    > cons: unable to align correcly images with different structure
    
-* FIJI
+
+
+### * FIJI
 
   FIJI is an image analysis tool mostly used by bioanalysis. It's a combination of ImageJ and ImageJ2, and comes with many plugins preinstalled and an update manager that allows also to install new plugins within the app.
 
-  ### review
-  
-* hugin
+  **review**
+  > pros: tons of options, super precise, super versatile, super customizable
+> cons: tons of options, hardware intensive (especially CPU and RAM), few plugins support GPU acceleration, (therefore) slower
+
+
+### * hugin
+
 ### Other interesting tools still to try
 * opencv online
 * elastix
@@ -74,5 +80,17 @@ ASUS ROG GL502VM
     1. import all the images as a serie (file > import > import serie of images)
     2. go to plugin, head to registration, select the desired plugin
 #### FIJI PLUGINS
+  **disclaimer**
+  >If you are using a computer with many CPU cores, you need to make sure that you have enough memory (RAM) to handle your images for alignment. In general, you'll need 10x the file size of your largest 2D image for each core (see: https://imagej.net/plugins/trakem2/#how-much-ram-should-i-allocate-to-the-jvm-for-fiji-to-run-trakem2). EXAMPLE: If your dataset consists of images that are 600MB each and your computer has 12 cores, you will need at least 72 GB of RAM (= 600 MB x 10 x 12 cores).  
+cit. The University of Texas at Austin (Texas Advanced Computing Center)
+ 
+ >in our tests we used 32 images about ~3mb each, that ended up using up to 96% of the 16gbs of ram. Often, ram saturation ends up prematurely the process giving an error. The disclaimer above was written for the elastic alignment but should be followed as a rule of thumb for all the plugins. 
 * elastic alignment
 ### Hugin
+
+# Future developments
+image elaboration through Google colab or similars  
+implementation of CLIJ for GPU acceleration in FIJI
+# Sources
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10819694/
+https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin/tuto1
