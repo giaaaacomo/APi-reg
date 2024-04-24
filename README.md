@@ -47,8 +47,8 @@ ASUS ROG GL502VM
    
 
    **review**
-   > pros: user Friendly, works well with similar images, fast  
-   > cons: unable to align correcly images with different structure
+   > **pros:** user Friendly, works well with similar images, fast  
+   > **cons:** unable to align correcly images with different structure
    
 
 
@@ -56,9 +56,24 @@ ASUS ROG GL502VM
 
   FIJI is an image analysis tool mostly used by bioanalysis. It's a combination of ImageJ and ImageJ2, and comes with many plugins preinstalled and an update manager that allows also to install new plugins within the app.
 
+Trying FIJI means trying the different plugins that do image registration. [Here](https://imagej.net/list-of-extensions) is the official list, that can be filtered to show only registration plugins; from that list we selected those who seemed to fit the best: keep in mind that the original use case scenario for the software is biomedical analysis, therefore many of the available tools are tailor-made for cellular-scale elements, for applications like the study of cellular reproduction, bone healing, tumoral cells development and propagation. This means that the available tools more often than not won't work as if they were designed for all-purpose images in mind, and this also means that not all plugins will work with our images, depending on their diversity, resolution, and visual features. Keep also in mind that biomedical analysis workstations have powerful hardware, and the programs they use are though to be run in those machines.
+All of this leads to a steep selection in the available plugins (that will be explained further in the next chapter) and we ended up trying the following:
+1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
+2. [Descriptor-based series registration]
+3. [Rigid Registration]
+4. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
+5. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
+6. [Register Virtual Stack Slices](https://imagej.net/plugins/register-virtual-stack-slices)
+7. [TurboReg](https://bigwww.epfl.ch/thevenaz/turboreg/)
+8. [MultiStackReg](https://github.com/miura/MultiStackRegistration)
+9. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)
+10. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
+11. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
+12. [Fijiyama](https://imagej.net/plugins/fijiyama)
+    
   **review**
-  > pros: tons of options, super precise, super versatile, super customizable
-> cons: tons of options, hardware intensive (especially CPU and RAM), few plugins support GPU acceleration, (therefore) slower
+  > **pros:** tons of options, super precise, super versatile, super customizable  
+  > **cons:** tons of options, hardware intensive (especially CPU and RAM), few plugins support GPU acceleration, (therefore) slower
 
 
 ### * hugin
@@ -89,8 +104,8 @@ cit. The University of Texas at Austin (Texas Advanced Computing Center)
 ### Hugin
 
 # Future developments
-image elaboration through Google colab or similars  
-implementation of CLIJ for GPU acceleration in FIJI
+    *image elaboration through Google colab or similars  
+    *implementation of CLIJ for GPU acceleration in FIJI
 # Sources
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10819694/
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10819694/  
 https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin/tuto1
