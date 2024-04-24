@@ -126,9 +126,11 @@ cit. The University of Texas at Austin (Texas Advanced Computing Center)
 ___
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
    >*results:* failure  
-   >*elapsed time:*  (MSI)
+   >*elapsed time:* 12h (MSI)
    
-   Subdivides the images into meshes of triangles; tries to connect the vertices simulating a spring-like deformation
+   Subdivides the images into meshes of triangles; tries to connect the vertices simulating a spring-like deformation, then tries to match the content of the triangles and the vertices.
+   Despite a lot of customizability, after 12 hours of processing the output that ESA gave us was a stack of 202 black images
+   
 3. [Descriptor-based series registration]
    >*results:* failure  
    >*elapsed time:*  
@@ -139,7 +141,12 @@ ___
 
 7. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
    >*results:* failure  
-   >*elapsed time:*  
+   >*elapsed time:* 15min (MSI)
+   
+   The plugin basically searches for SIFT features and tries to match them between images.
+   It is actually able to match similar images, but struggles with more articulated ones.
+   Tried with both affinity and similarity algorithms, the latter gave the best results.
+    
 
 9. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
     >*results:* mixed  
@@ -184,6 +191,8 @@ We tried both rigid body and affine methods, but we didn't get good results.
     >*elapsed time:*  
     
 ### Hugin
+
+# Conclusions  
 
 # Future developments
     *peer-review of the project, both from scientist and from computer vision experts
