@@ -153,7 +153,11 @@ ___
    The plugin basically searches for SIFT features and tries to match them between images.
    It is actually able to match similar images, but struggles with more articulated ones.
    Tried with both affinity and similarity algorithms, the former gave better results, but was not able to keep a consistent position of the picture.
-    
+
+    <div style="display: flex; flex-wrap: wrap;">
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/linearstackalignmentsiftaffinity-ezgif.com-optimize.gif" width="250px" alt="text-1"><figcaption>MSR Affine</figcaption>
+  <img src="" width="250px" alt="text-2"><figcaption>MSR Rigid Body</figcaption>
+</div>
 
 9. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
     >*results:* mixed  
@@ -162,6 +166,11 @@ ___
     This is an advanced version of Linear Stack Alignment with SIFT, that is able to match the alignment to the desired channel.
    The results are mixed: worse than the basic LSA, but surprisingly good with another set of images.
    It requires the PTBIOP update from the update manager.
+
+   <div style="display: flex; flex-wrap: wrap;">
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/monalisa_multichannel_compressed.gif" width="250px" alt="text-1"><figcaption>Monnalisa multichanneled</figcaption>
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/Aligned_deyck_livelli-ezgif.com-optimize.gif" width="250px" alt="text-2"><figcaption>D'Eick multichanneled</figcaption>
+</div>
 
 11. [Register Virtual Stack Slices](https://imagej.net/plugins/register-virtual-stack-slices)
     >*results:* failure  
@@ -184,9 +193,11 @@ ___
         ```image>color>split channels```  
     Now we have to run the plugin and select the source as first image, using it as reference, the target as second image that needs to be aligned to the first stack. Since it allows the registration of only two channels at a time, it's possibile to do a second registration using the first as reference, to register the third channel. It is then possible to merge the channels back into one to get the colored images back.
     We tried both rigid body and affine methods, but we didn't get good results.
-
+<div style="display: flex; flex-wrap: wrap;">
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/monalisa%20affineMSR.gif" width="250px" alt="text-1"><figcaption>MSR Affine</figcaption>
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/monalisarigidbodyMSR-ezgif.com-optimize.gif" width="250px" alt="text-2"><figcaption>MSR Rigid Body</figcaption>
+</div>
    
-
 17. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)  
     ~~>*results:*~~   
     ~~>*elapsed time:*~~  
@@ -216,12 +227,18 @@ ___
     >*elapsed time:* ~5min (MSI)
 
     Uses opencv to elaborate the images; needs a specific server to be added to the server list in order to be downloaded into FIJI (https://sites.imagej.net/Template_Matching/). Differently from the other plugins, it is launched through ```Plugins>Template Matching>Align slices in stack...```. Like MultiStackReg needs a grayscale, therefore it's needed a channel split for the image serie. Similarly to the Descriptor-based series registration plugin, it allows to select an area of the image that needs to be searched in the other images. It also allows to search in a defined (by the user) area around the selected area. The output prints the displacement of the picture between the images, aligns the pictures to the area of the selected images, but doesn't seem able to resize the picture to match the other. Also doesn't seem to be very precise. Contacting the developer as this seems to be a possible solution if a workaround is found.
+
+    <div style="display: flex; flex-wrap: wrap;">
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/monalisa_tempmatchandslicealign.gif" width="250px" alt="text-1"><figcaption>Monalisa TMSA</figcaption>
+  
+</div>
+
     ##### Testing queued
-25. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
-26. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)    
-27. [Parallel-Fiji-CMTK-Registration](https://github.com/sandorbx/Parallel-Fiji-CMTK-Registration)
-28. [Fijiyama](https://imagej.net/plugins/fijiyama)
-29. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
+26. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
+27. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)    
+28. [Parallel-Fiji-CMTK-Registration](https://github.com/sandorbx/Parallel-Fiji-CMTK-Registration)
+29. [Fijiyama](https://imagej.net/plugins/fijiyama)
+30. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
 ### Hugin
 Hugin focuses on the creation of large panoramas and mosaic of images. Despite this, its feature-recognizing algorithms allow to match images in stacks. The program allows to choose the level of complexity of the tools by going to ```interface``` and checking ```expert```.
 The program allows to run and automate complex operation through terminal, but has an advanced GUI that allows for precision works.
