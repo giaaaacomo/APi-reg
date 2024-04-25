@@ -56,10 +56,10 @@ ASUS ROG GL502VM
 
   FIJI is an image analysis tool mostly used by bioanalysis. It's a combination of ImageJ and ImageJ2, and comes with many plugins preinstalled and an update manager that allows also to install new plugins within the app.
 
-Trying FIJI means trying the different plugins that do image registration. [Here](https://imagej.net/list-of-extensions) is the official list, that can be filtered to show only registration plugins; from that list we selected those who seemed to fit the best: keep in mind that the original use case scenario for the software is biomedical analysis, therefore many of the available tools are tailor-made for cellular-scale elements, for applications like the study of cellular reproduction, bone healing, tumoral cells development and propagation. This means that the available tools more often than not won't work as if they were designed for all-purpose images in mind, and this also means that not all plugins will work with our images, depending on their diversity, resolution, and visual features. Keep also in mind that biomedical analysis workstations have powerful hardware, and the programs they use are though to be run in those machines.
+Trying FIJI means trying the different plugins that do image registration. [Here](https://imagej.net/list-of-extensions) is the official list, that can be filtered to show only registration plugins; from that list we selected those who seemed to fit the best: keep in mind that the original use case scenario for the software is biomedical analysis, therefore many of the available tools are tailor-made for cellular-scale elements, for applications like the study of cellular reproduction, bone healing, tumoral cells development and propagation. This means that the available tools more often than not won't work as if they were designed for all-purpose images in mind, and this also means that not all plugins will work with our images, depending on their diversity, resolution, and visual features. Keep also in mind that biomedical analysis workstations have powerful hardware, and the programs they use are though to be run in those machines.  
 All of this leads to a steep selection in the available plugins (that will be explained further in the next chapter) and we ended up picking the following:
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
-2. [Descriptor-based series registration]
+2. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
 3. [Rigid Registration]
 4. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
 5. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
@@ -70,6 +70,7 @@ All of this leads to a steep selection in the available plugins (that will be ex
 10. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
 11. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
 12. [Fijiyama](https://imagej.net/plugins/fijiyama)
+13. [Template Matching and Slice Alignment](https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin)
     
   **review**
   > **pros:** tons of options, super precise, super versatile, super customizable  
@@ -137,9 +138,13 @@ ___
    Subdivides the images into meshes of triangles; tries to connect the vertices simulating a spring-like deformation, then tries to match the content of the triangles and the vertices.
    Despite a lot of customizability, after 12 hours of processing the output that ESA gave us was a stack of 202 black images.
    
-3. [Descriptor-based series registration]
-   >*results:* failure  
-   >*elapsed time:*  
+3. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
+   >*results:* X  
+   >*elapsed time:* X
+   new scheduling 
+
+   Probably the most interesting plugin as it allows to select a partition of the first image and use that as a descriptor (basically checks only for the feats inside the selected area), but appears to be way slower than ESA; it also allows to adjust the threshold of the feats, thus adjusting the density of feats in the area.
+   We had to re-schedule this test due to the time-intensive elaboration.
 
 7. [Linear Stack Alignment with SIFT](https://imagej.net/plugins/linear-stack-alignment-with-sift)
    >*results:* failure  
@@ -173,18 +178,18 @@ ___
     >*results:* failure  
     >*elapsed time:* ~5 min (ROG)  
 
-MultiStackReg was made to align unregistered color channels in microscope pictures (when this happens, images get blurry). It's based on TurboReg, and above optimizations, adds the ability to check stacks of images instead of singular images.  
-Since it's purpose is to align channels of the same image, but we need it's ability to align different images, we need to pick one as a source, clone that as many times as there are images to compute, open the source (that now is a sequence) separately, then open the others as a sequence.  
-Since it's made to align channels, the images in both sequences need to have them splitted:  
-    ```image>color>split channels```  
-Now we have to run the plugin and select the source as first image, using it as reference, the target as second image that needs to be aligned to the first stack. Since it allows the registration of only two channels at a time, it's possibile to do a second registration using the first as reference, to register the third channel. It is then possible to merge the channels back into one to get the colored images back.
-We tried both rigid body and affine methods, but we didn't get good results.
+    MultiStackReg was made to align unregistered color channels in microscope pictures (when this happens, images get blurry). It's based on TurboReg, and above optimizations, adds the ability to check stacks of images instead of singular images.  
+    Since it's purpose is to align channels of the same image, but we need it's ability to align different images, we need to pick one as a source, clone that as many times as there are images to compute, open the source (that now is a sequence) separately, then open the others as a sequence.  
+    Since it's made to align channels, the images in both sequences need to have them splitted:  
+        ```image>color>split channels```  
+    Now we have to run the plugin and select the source as first image, using it as reference, the target as second image that needs to be aligned to the first stack. Since it allows the registration of only two channels at a time, it's possibile to do a second registration using the first as reference, to register the third channel. It is then possible to merge the channels back into one to get the colored images back.
+    We tried both rigid body and affine methods, but we didn't get good results.
    
 
-
-17. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)
-    >*results:* failure  
-    >*elapsed time:*
+17. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)  
+    ~~>*results:*~~   
+    ~~>*elapsed time:*~~  
+    not available anymore  
     
 
 5. [Rigid Registration]
@@ -194,36 +199,53 @@ We tried both rigid body and affine methods, but we didn't get good results.
    Simple tool made to correct color shift and translation; like MultiStackReg requires a single channel, but is able to apply the transformation to the other channels automatically. Seems to be unable to elaborate complex and diverse data such as the ones provided in the research.
 
 19. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
-    >*results:* failure  
+    >*results:*queued   
     >*elapsed time:*  
 
 21. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
-    >*results:* failure  
+    >*results:*queued   
     >*elapsed time:*  
 
 23. [Fijiyama](https://imagej.net/plugins/fijiyama)
-    >*results:* failure  
+    >*results:*queued   
     >*elapsed time:*  
     scheduled -- needs an older java version
-    
+24. [Template Matching and Slice Alignment](https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin)
+    >*results:*confused   
+    >*elapsed time:* ~5min (MSI)
+
+    Uses opencv to elaborate the images; needs a specific server to be added to the server list in order to be downloaded into FIJI (https://sites.imagej.net/Template_Matching/). Differently from the other plugins, it is launched through ```Plugins>Template Matching>Align slices in stack...```. Like MultiStackReg needs a grayscale, therefore it's needed a channel split for the image serie. Similarly to the Descriptor-based series registration plugin, it allows to select an area of the image that needs to be searched in the other images. It also allows to search in a defined (by the user) area around the selected area. The output prints the displacement of the picture between the images, aligns the pictures to the area of the selected images, but doesn't seem able to resize the picture to match the other. Also doesn't seem to be very precise. Contacting the developer as this seems to be a possible solution if a workaround is found.
+    ##### Testing queued
+25. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
+26. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)    
+27. [Parallel-Fiji-CMTK-Registration](https://github.com/sandorbx/Parallel-Fiji-CMTK-Registration)
+28. [Fijiyama](https://imagej.net/plugins/fijiyama)
+29. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
 ### Hugin
 Hugin focuses on the creation of large panoramas and mosaic of images. Despite this, its feature-recognizing algorithms allow to match images in stacks. The program allows to choose the level of complexity of the tools by going to ```interface``` and checking ```expert```.
 The program allows to run and automate complex operation through terminal, but has an advanced GUI that allows for precision works.
 We focused on two methods:
 
-## Focus stacking with Hugin and Enfuse
+#### Focus stacking with Hugin and Enfuse
 After loading the images in Hugin, the program allows the selection of the (hypothetical) lenses, but since we are using scans we'll cancel the request; the program will then approximate. Then under the feature matching section of the ```Photos``` tab, we need to select ```Hugin's CPFind```, the method that will look for control points, or points that don't (or shouldn't) change bewteen images. It will then ask to choose which geometric algorithm should be used to match control points between the images, to optimize the alignment. We need to choose ```Position (y,p,r)``` to avoid further deformation.
 The program will then match tridimensionally the images, that now need to be stitched to be able to have single images that can be overlapped.
 To do this we need to go to the ```Stitcher``` tab, then ```Calculate optimal size```, then untick all the following boxes, except for ```No exposure correction, low dynamic range```, since we don't have actual photograps that need postproduction. Then we ```Stitch```.  
 Now we can use enfuse to precisely overlap layers by opening the terminal and typing the following: ```{executable_path}/enfuse     --exposure-weight=0     --saturation-weight=0     --contrast-weight=1     --hard-mask     --output=output.tif INPUT*.tif```.
 
-## Align image stack
+
+<div style="display: flex; flex-wrap: wrap;">
+  <img src="https://github.com/giaaaacomo/APi-reg/assets/38686675/fbaa1118-cd39-48a3-b289-3ed22c109da8" width="250px" alt="text-1"><figcaption>Basic TIFF overlapping</figcaption>
+  <img src="https://github.com/giaaaacomo/APi-reg/assets/38686675/1ccbc0b3-291d-4aaa-b38b-bbe039004d57" width="250px" alt="text-2"><figcaption>Enfuse</figcaption>
+</div>
+
+
+#### Align image stack
 The process is the same of the above, except that we need to select ```Align image stack```, that should be precisely what we need. Unfortunately the control points optimization ends up giving alway ```error 1```, terminating the whole process. We were not able to overcome this problem.
 
 
 # Conclusions  
     The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used in FIJI date back up to the late 90's, but are still commonly used today in bioanalysis thanks to their specificity that allows for great precision in their native fields. Hugin could be able to provide a solution but at the actual point, the ```Align image stack``` is not working, and the other options provided don't actually match the images effectively.
-This seems to be the perfect field for neural networks specialized in computer vision, but our research does not show signs of a specific tool made for this application as of now.
+This seems to be the perfect field for neural networks specialized in computer vision, but our research does not show signs of a specific tool made for this application as of now, available to the public.
 
 # Future developments
     *peer-review of the project, both from scientist and from computer vision experts
