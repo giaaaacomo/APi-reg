@@ -184,6 +184,7 @@ ___
         ```image>color>split channels```  
     Now we have to run the plugin and select the source as first image, using it as reference, the target as second image that needs to be aligned to the first stack. Since it allows the registration of only two channels at a time, it's possibile to do a second registration using the first as reference, to register the third channel. It is then possible to merge the channels back into one to get the colored images back.
     We tried both rigid body and affine methods, but we didn't get good results.
+
    
 
 17. [N-D Sequence Registration](https://github.com/tischi/fiji-plugin-imageRegistration)  
