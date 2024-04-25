@@ -262,7 +262,7 @@ The process is the same of the above, except that we need to select ```Align ima
 
 
 # Conclusions  
-    The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used in FIJI date back up to the late 90's, but are still commonly used today in bioanalysis thanks to their specificity that allows for great precision in their native fields. Hugin could be able to provide a solution but at the actual point, the ```Align image stack``` is not working, and the other options provided don't actually match the images effectively.
+The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used in FIJI date back up to the late 90's, but are still commonly used today in bioanalysis thanks to their specificity that allows for great precision in their native fields. Hugin could be able to provide a solution but at the actual point, the ```Align image stack``` is not working, and the other options provided don't actually match the images effectively.
 This seems to be the perfect field for neural networks specialized in computer vision, but our research does not show signs of a specific tool made for this application as of now, available to the public.
 
 # Future developments
