@@ -156,7 +156,7 @@ ___
 
     <div style="display: flex; flex-wrap: wrap;">
    <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/linearstackalignmentsiftaffinity-ezgif.com-optimize.gif" width="250px" alt="text-1"><figcaption>LSA Affinity</figcaption>
-   <img src="" width="250px" alt="text-2"><figcaption>MSR Rigid Body</figcaption>
+   <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/sift_similarity-ezgif.com-optimize.gif" width="250px" alt="text-2"><figcaption>MSR Rigid Body</figcaption>
 </div>
 
 9. [Linear Stack Alignment with SIFT/Multichannel](https://imagej.net/plugins/linear-stack-alignment-with-sift)
@@ -167,8 +167,8 @@ ___
    The results are mixed: worse than the basic LSA, but surprisingly good with another set of images.
    It requires the PTBIOP update from the update manager.
    <div style="display: flex; flex-wrap: wrap;">
-   <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/monalisa_multichannel_compressed.gif" width="250px" alt="text-1"><figcaption>MSR Affine</figcaption>
-   <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/Aligned_deyck_livelli-ezgif.com-optimize.gif" width="250px" alt="text-2"><figcaption>MSR Rigid Body</figcaption>
+   <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/monalisa_multichannel_compressed.gif" width="250px" alt="text-1"><figcaption>LSA Monnalisa Multichanneled</figcaption>
+   <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/Aligned_deyck_livelli-ezgif.com-optimize.gif" width="250px" alt="text-2"><figcaption>LSA D'Eyck Multichanneled</figcaption>
 </div>
   
 
