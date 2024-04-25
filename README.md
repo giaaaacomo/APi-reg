@@ -155,7 +155,7 @@ ___
    Tried with both affinity and similarity algorithms, the former gave better results, but was not able to keep a consistent position of the picture.
 
     <div style="display: flex; flex-wrap: wrap;">
-  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/linearstackalignmentsiftaffinity-ezgif.com-optimize.gif" width="250px" alt="text-1"><figcaption>MSR Affine</figcaption>
+  <img src="https://github.com/giaaaacomo/APi-reg/blob/main/assets/linearstackalignmentsiftaffinity-ezgif.com-optimize.gif" width="250px" alt="text-1"><figcaption>LSA Affinity</figcaption>
   <img src="" width="250px" alt="text-2"><figcaption>MSR Rigid Body</figcaption>
 </div>
 
