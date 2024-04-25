@@ -76,7 +76,13 @@ All of this leads to a steep selection in the available plugins (that will be ex
   > **cons:** tons of options, hardware intensive (especially CPU and RAM), few plugins support GPU acceleration, (therefore) slower
 
 
-### * hugin
+### * Hugin
+
+Hugin focuses on the creation of large panoramas and mosaic of images. Despite this, its feature-recognizing algorithms allow to match images in stacks. The program allows to choose the level of complexity of the tools by going to ```interface``` and checking ```expert```.
+The program allows to run and automate complex operation through terminal, but has an advanced GUI that allows for precision works.
+ **review**
+  > **pros:** allows for really precise operation, versatile GUI, tools are not too difficult to use, interesting result
+  > **cons:** image stacking not working in the updated program, kinda steep learning curve, settings are confusing, advanced user oriented
 
 ### Other interesting tools still to try
 * opencv online
@@ -198,11 +204,26 @@ We tried both rigid body and affine methods, but we didn't get good results.
 23. [Fijiyama](https://imagej.net/plugins/fijiyama)
     >*results:* failure  
     >*elapsed time:*  
+    scheduled -- needs an older java version
     
 ### Hugin
+Hugin focuses on the creation of large panoramas and mosaic of images. Despite this, its feature-recognizing algorithms allow to match images in stacks. The program allows to choose the level of complexity of the tools by going to ```interface``` and checking ```expert```.
+The program allows to run and automate complex operation through terminal, but has an advanced GUI that allows for precision works.
+We focused on two methods:
+
+## Focus stacking with Hugin and Enfuse
+After loading the images in Hugin, the program allows the selection of the (hypothetical) lenses, but since we are using scans we'll cancel the request; the program will then approximate. Then under the feature matching section of the ```Photos``` tab, we need to select ```Hugin's CPFind```, the method that will look for control points, or points that don't (or shouldn't) change bewteen images. It will then ask to choose which geometric algorithm should be used to match control points between the images, to optimize the alignment. We need to choose ```Position (y,p,r)``` to avoid further deformation.
+The program will then match tridimensionally the images, that now need to be stitched to be able to have single images that can be overlapped.
+To do this we need to go to the ```Stitcher``` tab, then ```Calculate optimal size```, then untick all the following boxes, except for ```No exposure correction, low dynamic range```, since we don't have actual photograps that need postproduction. Then we ```Stitch```.  
+Now we can use enfuse to precisely overlap layers by opening the terminal and typing the following: ```{executable_path}/enfuse     --exposure-weight=0     --saturation-weight=0     --contrast-weight=1     --hard-mask     --output=output.tif INPUT*.tif```.
+
+## Align image stack
+The process is the same of the above, except that we need to select ```Align image stack```, that should be precisely what we need. Unfortunately the control points optimization ends up giving alway ```error 1```, terminating the whole process. We were not able to overcome this problem.
+
 
 # Conclusions  
-    The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used date back up to the late 90's, but are still commonly used today in 
+    The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used in FIJI date back up to the late 90's, but are still commonly used today in bioanalysis thanks to their specificity that allows for great precision in their native fields. Hugin could be able to provide a solution but at the actual point, the ```Align image stack``` is not working, and the other options provided don't actually match the images effectively.
+This seems to be the perfect field for neural networks specialized in computer vision, but our research does not show signs of a specific tool made for this application as of now.
 
 # Future developments
     *peer-review of the project, both from scientist and from computer vision experts
