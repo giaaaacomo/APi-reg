@@ -57,6 +57,7 @@ ASUS ROG GL502VM
   FIJI is an image analysis tool mostly used by bioanalysis. It's a combination of ImageJ and ImageJ2, and comes with many plugins preinstalled and an update manager that allows also to install new plugins within the app.
 
 Trying FIJI means trying the different plugins that do image registration. [Here](https://imagej.net/list-of-extensions) is the official list, that can be filtered to show only registration plugins; from that list we selected those who seemed to fit the best: keep in mind that the original use case scenario for the software is biomedical analysis, therefore many of the available tools are tailor-made for cellular-scale elements, for applications like the study of cellular reproduction, bone healing, tumoral cells development and propagation. This means that the available tools more often than not won't work as if they were designed for all-purpose images in mind, and this also means that not all plugins will work with our images, depending on their diversity, resolution, and visual features. Keep also in mind that biomedical analysis workstations have powerful hardware, and the programs they use are though to be run in those machines.  
+Interestingly, the mainly used image format is the TIF, which allows to memorize different layers, since in the ordinary usage of the software those are used to show both the deformation and variation of specimens over time, and the vertical sections (interpreted as slices) of 3d scans, like CT scans).
 All of this leads to a steep selection in the available plugins (that will be explained further in the next chapter) and we ended up picking the following:
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
 2. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
@@ -76,6 +77,8 @@ All of this leads to a steep selection in the available plugins (that will be ex
   > **pros:** tons of options, super precise, super versatile, super customizable  
   > **cons:** tons of options, hardware intensive (especially CPU and RAM), few plugins support GPU acceleration, (therefore) slower
 
+>> **note**
+regarding GPU acceleration, in the recent years has been developed a library called [CLIJ](https://clij.github.io/), actually at its v2, capable of converting automatically the macro files from fiji to openGL, that is the native language for GPU and general acceleration. Despite this, macros need some advanced customization, therefore its implementation in this research is expected in further developments yet to be planned.  
 
 ### * Hugin
 
@@ -106,10 +109,10 @@ The program allows to run and automate complex operation through terminal, but h
 ##### How do registration works (Feature extraction)
 The basic concept followed by the majority of plugins used for this research is that the program first of all elaborates every image, looking for peculiar and recurring features, then compares every feature to the other images, then tries to match the features in every image by moving, rotating and scaling them. Some specific plugin use peculiar manipulations that work in custom ways (eg. Elastic Stack Manipolation).
 There are two main methods for feature extraction: SIFT and MOPS. To summarize, here are the differences:
-* SIFT: It detects keypoints in an image that are stable under changes like scale, rotation, and illumination. It uses a complex process involving finding extrema in a scale-space representation of the image and assigning orientations to these keypoints. Then, a descriptor is computed around each keypoint to capture the local image information.
+* SIFT: aka *scale-invariant feature transform*, detects keypoints in an image that are stable under changes like scale, rotation, and illumination. It uses a complex process involving finding extrema in a scale-space representation of the image and assigning orientations to these keypoints. Then, a descriptor is computed around each keypoint to capture the local image information.
   >*tends to be more precise, but also more complex to compute  
   >*works better even in challenging conditions 
-* MOPS: It focuses on extracting oriented patches at different scales from the image. These patches are centered around interest points, typically corners detected using the Harris corner detector. The patch is then rotated to align with a dominant local gradient direction and a descriptor is obtained by sampling the intensity values within the patch.
+* MOPS: aka *multi-scale oriented patches*, focuses on extracting oriented patches at different scales from the image. These patches are centered around interest points, typically corners detected using the Harris corner detector. The patch is then rotated to align with a dominant local gradient direction and a descriptor is obtained by sampling the intensity values within the patch.
   >*tends to be faster, both to compute and to compare  
   >*less precise  
   >*better distribution along the space  
@@ -128,7 +131,10 @@ There are different ways to register images, and the main are:
   >If you are using a computer with many CPU cores, you need to make sure that you have enough memory (RAM) to handle your images for alignment. In general, you'll need 10x the file size of your largest 2D image for each core (see: https://imagej.net/plugins/trakem2/#how-much-ram-should-i-allocate-to-the-jvm-for-fiji-to-run-trakem2). EXAMPLE: If your dataset consists of images that are 600MB each and your computer has 12 cores, you will need at least 72 GB of RAM (= 600 MB x 10 x 12 cores).  
 cit. The University of Texas at Austin (Texas Advanced Computing Center)
  
- >>in our tests we used 32 images about ~3mb each, that ended up using up to 96% of the 16gbs of ram. Often, ram saturation ends up prematurely the process giving an error. The disclaimer above was written for the elastic alignment but should be followed as a rule of thumb for all the plugins. 
+ >>in our tests we used 32 images about ~3mb each, that ended up using up to 96% of the 16gbs of ram. Often, ram saturation ends up prematurely the process giving an error. The disclaimer above was written for the elastic alignment but should be followed as a rule of thumb for all the plugins.
+
+ **disclaimer**
+ > For this research, the tests have been conducted on two sets of images, one containing 32 images of the Monnalisa, the other containing 19 images of the D'Eyck trittic. The first one has been used as the main evaluation parameter since the images present more diversity. In a sense, it might be considered an extreme condition since it is also the most populated series of images (the cluster actually contains 119 image files, but at the moment only 32 of those files are available due to server reorganization), cause the other series are composed of ~20 images, but the main idea was to be able to elaborate bigger volumes of files.
 
 ___
 1. [Elastic Stack Alignment](https://imagej.net/plugins/elastic-alignment-and-montage)
@@ -262,7 +268,7 @@ The process is the same of the above, except that we need to select ```Align ima
 
 
 # Conclusions  
-The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used in FIJI date back up to the late 90's, but are still commonly used today in bioanalysis thanks to their specificity that allows for great precision in their native fields. Hugin could be able to provide a solution but at the actual point, the ```Align image stack``` is not working, and the other options provided don't actually match the images effectively.
+The registration of different images containing a common picture seems to be still challenging through all the modern solutions available to the public. The computer vision algorithms used in FIJI date back up to the late 90's, but are still commonly used today in bioanalysis thanks to their specificity that allows for great precision in their native fields. Hugin could be able to provide a solution but at the actual point, the ```Align image stack``` is not working, and the other options provided don't actually match the images effectively.  
 This seems to be the perfect field for neural networks specialized in computer vision, but our research does not show signs of a specific tool made for this application as of now, available to the public.
 
 # Future developments
