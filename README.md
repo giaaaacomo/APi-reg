@@ -49,9 +49,8 @@ ASUS ROG GL502VM
    **review**
    > **pros:** user Friendly, works well with similar images, fast  
    > **cons:** unable to align correcly images with different structure
-   
 
-
+<br/><br/> 
 ### * FIJI
 
   FIJI is an image analysis tool mostly used by bioanalysis. It's a combination of ImageJ and ImageJ2, and comes with many plugins preinstalled and an update manager that allows also to install new plugins within the app.
@@ -77,9 +76,10 @@ All of this leads to a steep selection in the available plugins (that will be ex
   > **pros:** tons of options, super precise, super versatile, super customizable  
   > **cons:** tons of options, hardware intensive (especially CPU and RAM), few plugins support GPU acceleration, (therefore) slower
 
->> **note**
+>> **note**  
 regarding GPU acceleration, in the recent years has been developed a library called [CLIJ](https://clij.github.io/), actually at its v2, capable of converting automatically the macro files from fiji to openGL, that is the native language for GPU and general acceleration. Despite this, macros need some advanced customization, therefore its implementation in this research is expected in further developments yet to be planned.  
 
+<br/><br/>
 ### * Hugin
 
 Hugin focuses on the creation of large panoramas and mosaic of images. Despite this, its feature-recognizing algorithms allow to match images in stacks. The program allows to choose the level of complexity of the tools by going to ```interface``` and checking ```expert```.
@@ -88,6 +88,7 @@ The program allows to run and automate complex operation through terminal, but h
   > **pros:** allows for really precise operation, versatile GUI, tools are not too difficult to use, interesting result
   > **cons:** image stacking not working in the updated program, kinda steep learning curve, settings are confusing, advanced user oriented
 
+<br/><br/>
 ### Other interesting tools still to try
 * opencv online
 * elastix
@@ -123,9 +124,11 @@ There are different ways to register images, and the main are:
 * Rigid (translation + rotation)  
 * Similarity (translation + rotation + isotropic scaling)  
 * Affine  
-* Elastic (via BUnwarpJ with cubic B-splines)  
-(source: https://imagej.net/imaging/registration)
+* Elastic (via BUnwarpJ with cubic B-splines)
 
+(source: https://imagej.net/imaging/registration)  
+<br/><br/>
+  
 #### FIJI PLUGINS
   **disclaimer**
   >If you are using a computer with many CPU cores, you need to make sure that you have enough memory (RAM) to handle your images for alignment. In general, you'll need 10x the file size of your largest 2D image for each core (see: https://imagej.net/plugins/trakem2/#how-much-ram-should-i-allocate-to-the-jvm-for-fiji-to-run-trakem2). EXAMPLE: If your dataset consists of images that are 600MB each and your computer has 12 cores, you will need at least 72 GB of RAM (= 600 MB x 10 x 12 cores).  
@@ -245,6 +248,7 @@ ___
 28. [Parallel-Fiji-CMTK-Registration](https://github.com/sandorbx/Parallel-Fiji-CMTK-Registration)
 29. [Fijiyama](https://imagej.net/plugins/fijiyama)
 30. [Descriptor-based series registration](https://imagej.net/plugins/descriptor-based-registration-2d-3d)
+<br/><br/>
 ### Hugin
 Hugin focuses on the creation of large panoramas and mosaic of images. Despite this, its feature-recognizing algorithms allow to match images in stacks. The program allows to choose the level of complexity of the tools by going to ```interface``` and checking ```expert```.
 The program allows to run and automate complex operation through terminal, but has an advanced GUI that allows for precision works.
