@@ -187,7 +187,7 @@ ___
 13. [TurboReg](https://bigwww.epfl.ch/thevenaz/turboreg/)
     >~~*results:*~~  
     >~~*elapsed time:*~~  
-    Used MultiStackReg instead, that is an advanced version of this.
+    Used MultiStackReg instead, that turned out to be an advanced version of this.
 
 15. [MultiStackReg](https://github.com/miura/MultiStackRegistration)
     >*results:* failure  
