@@ -220,19 +220,19 @@ ___
    Simple tool made to correct color shift and translation; like MultiStackReg requires a single channel, but is able to apply the transformation to the other channels automatically. Seems to be unable to elaborate complex and diverse data such as the ones provided in the research.
 
 19. [Multiview-Reconstruction](https://imagej.net/plugins/multiview-reconstruction)
-    >*results:*queued   
+    >*results:* queued   
     >*elapsed time:*  
 
 21. [DS4H Image Alignment](https://imagej.net/plugins/ds4h-image-alignment)
-    >*results:*queued   
+    >*results:* queued   
     >*elapsed time:*  
 
 23. [Fijiyama](https://imagej.net/plugins/fijiyama)
-    >*results:*queued   
+    >*results:* queued   
     >*elapsed time:*  
     scheduled -- needs an older java version
 24. [Template Matching and Slice Alignment](https://sites.google.com/site/qingzongtseng/template-matching-ij-plugin)
-    >*results:*confused   
+    >*results:* confused   
     >*elapsed time:* ~5min (MSI)
 
     Uses opencv to elaborate the images; needs a specific server to be added to the server list in order to be downloaded into FIJI (https://sites.imagej.net/Template_Matching/). Differently from the other plugins, it is launched through ```Plugins>Template Matching>Align slices in stack...```. Like MultiStackReg needs a grayscale, therefore it's needed a channel split for the image serie. Similarly to the Descriptor-based series registration plugin, it allows to select an area of the image that needs to be searched in the other images. It also allows to search in a defined (by the user) area around the selected area. The output prints the displacement of the picture between the images, aligns the pictures to the area of the selected images, but doesn't seem able to resize the picture to match the other. Also doesn't seem to be very precise. Contacting the developer as this seems to be a possible solution if a workaround is found.
